@@ -4993,6 +4993,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1213189847}
+  - component: {fileID: 1213189848}
   m_Layer: 5
   m_Name: Products
   m_TagString: Untagged
@@ -5039,6 +5040,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -20}
   m_SizeDelta: {x: -24, y: -80}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1213189848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213189846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dca4e7923aa1f419dae68e4755b449ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSelected: 3
 --- !u!1 &1266234822
 GameObject:
   m_ObjectHideFlags: 0
@@ -6660,7 +6674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.64705884}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8018,6 +8032,7 @@ MonoBehaviour:
   - {fileID: 168485930}
   - {fileID: 333151200}
   - {fileID: 2037687665}
+  orderProductCount: 0
 --- !u!114 &2021231139
 MonoBehaviour:
   m_ObjectHideFlags: 0
