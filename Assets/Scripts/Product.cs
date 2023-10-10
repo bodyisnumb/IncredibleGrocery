@@ -1,37 +1,31 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Product : MonoBehaviour
 {
-    
     public Toggle toggle;
-
+    
     private Image image;
-    private Color tempColor;
+    private Color normalColor;
+    private Color disabledColor;
 
-    void Start()
+    private void Start()
     {
         image = GetComponent<Image>();
-        
+        normalColor = image.color;
+        disabledColor = new Color(normalColor.r, normalColor.g, normalColor.b, 0.5f);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(!toggle.isOn)
+        if (!toggle.isOn)
         {
-            tempColor = image.color;
-            tempColor.a = 1;
-            image.color = tempColor;
+            image.color = normalColor;
         }
         else
         {
-            tempColor = image.color;
-            tempColor.a = .5f;
-            image.color = tempColor;
+            image.color = disabledColor;
         }
-
     }
 }

@@ -7,14 +7,19 @@ public class Order : MonoBehaviour
 {
     public List<Sprite> imageList;
     public List<Image> uiImageElements;
-    private List<Sprite> selectedImages = new List<Sprite>();
+    public List<Sprite> selectedImages = new List<Sprite>();
 
-    public int orderProductCount;
+    public int maxOrderProductCount = 3;
 
     void Start()
     {
-        orderProductCount = Random.Range(1, 4);
-        SelectRandomImages(orderProductCount);
+        int previousOrderProductCount = PlayerPrefs.GetInt("OrderProductCount", 3);
+        
+        int newOrderProductCount = Random.Range(1, maxOrderProductCount + 1);
+        
+        PlayerPrefs.SetInt("OrderProductCount", newOrderProductCount);
+        
+        SelectRandomImages(newOrderProductCount);
     }
 
     void SelectRandomImages(int numberOfImages)
