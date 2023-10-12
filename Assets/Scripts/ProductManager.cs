@@ -12,6 +12,7 @@ public class ProductManager : MonoBehaviour
     private List<Toggle> allToggles = new List<Toggle>();
     public List<Image> selectedImages = new List<Image>();
 
+
     private void Start()
     {
         Toggle[] toggles = GetComponentsInChildren<Toggle>();
@@ -91,7 +92,7 @@ public class ProductManager : MonoBehaviour
             sellButton.interactable = false;
             ChangeButtonAlpha(sellButton, inactiveAlpha);
         }
-        else
+        else if (selectedCount == maxSelected)
         {
             sellButton.interactable = true;
             ChangeButtonAlpha(sellButton, activeAlpha);

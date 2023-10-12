@@ -8,9 +8,15 @@ public class SellButton : MonoBehaviour
 {
     public GameObject gameObjectA;
     public GameObject gameObjectB;
+    public Text moneyText;
+    public int moneyReward = 10;
+    private int totalMoneyEarned = 0;
 
     private void Start()
     {
+        totalMoneyEarned = PlayerPrefs.GetInt("TotalMoney", 0);
+        UpdateMoneyText();
+
         Button button = GetComponent<Button>();
         button.onClick.AddListener(CompareImageLists);
     }
@@ -32,14 +38,15 @@ public class SellButton : MonoBehaviour
                 {
                     Debug.Log("Common image found.");
                     imageFoundInListB = true;
-                    // Do something when a common image is found
+
+                    totalMoneyEarned += moneyReward;
+                    PlayerPrefs.SetInt("TotalMoney", totalMoneyEarned);
                 }
             }
 
             if (!imageFoundInListB)
             {
                 Debug.Log("Image from listA not found in listB.");
-                // Do something when an image in listA is not found in listB
                 matchFound = true;
             }
         }
@@ -47,12 +54,16 @@ public class SellButton : MonoBehaviour
         if (!matchFound)
         {
             Debug.Log("Comparison completed. Check the console for details.");
-            // Do something when matches were found
+
+            totalMoneyEarned *= 2;
+            PlayerPrefs.SetInt("TotalMoney", totalMoneyEarned);
         }
         else
         {
             Debug.Log("No matches found between the image lists.");
         }
+
+        UpdateMoneyText();
     }
 
     bool AreImagesEqual(Sprite imageA, Image imageB)
@@ -66,7 +77,6 @@ public class SellButton : MonoBehaviour
         int numberA = int.Parse(numbersA);
         int numberB = int.Parse(numbersB);
 
-//       Debug.Log("Numbers: " + numberA + "  " + numberB);
         return numberA == numberB;
     }
 
@@ -78,5 +88,10 @@ public class SellButton : MonoBehaviour
             result += match.Value;
         }
         return result;
+    }
+
+    void UpdateMoneyText()
+    {
+        moneyText.text = "$ " + totalMoneyEarned;
     }
 }
