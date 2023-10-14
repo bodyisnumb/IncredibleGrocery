@@ -8,6 +8,8 @@ public class SellButton : MonoBehaviour
 {
     public GameObject gameObjectA;
     public GameObject gameObjectB;
+    public List<Sprite> emojiList;
+    public Image emojiImage;
     public Text moneyText;
     public int moneyReward = 10;
     private int totalMoneyEarned = 0;
@@ -19,6 +21,7 @@ public class SellButton : MonoBehaviour
 
         Button button = GetComponent<Button>();
         button.onClick.AddListener(CompareImageLists);
+        button.interactable = false;
     }
 
     void CompareImageLists()
@@ -48,6 +51,7 @@ public class SellButton : MonoBehaviour
             {
                 Debug.Log("Image from listA not found in listB.");
                 matchFound = true;
+                emojiImage.sprite = emojiList[1];
             }
         }
 
@@ -55,8 +59,9 @@ public class SellButton : MonoBehaviour
         {
             Debug.Log("Comparison completed. Check the console for details.");
 
-            totalMoneyEarned *= 2;
+            totalMoneyEarned += ((moneyReward * 2 * (listA.Count)) - (moneyReward * listA.Count));
             PlayerPrefs.SetInt("TotalMoney", totalMoneyEarned);
+            emojiImage.sprite = emojiList[0];
         }
         else
         {
