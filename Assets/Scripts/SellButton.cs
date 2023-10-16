@@ -13,6 +13,7 @@ public class SellButton : MonoBehaviour
     public Text moneyText;
     public int moneyReward = 10;
     private int totalMoneyEarned = 0;
+    private List<int> foundStatusList = new List<int>();
 
     private void Start()
     {
@@ -29,7 +30,7 @@ public class SellButton : MonoBehaviour
         List<Sprite> listA = gameObjectA.GetComponent<Order>().selectedImages;
         List<Image> listB = gameObjectB.GetComponent<ProductManager>().selectedImages;
 
-        bool matchFound = false;
+        foundStatusList.Clear();
 
         foreach (Sprite imageA in listA)
         {
@@ -44,28 +45,29 @@ public class SellButton : MonoBehaviour
 
                     totalMoneyEarned += moneyReward;
                     PlayerPrefs.SetInt("TotalMoney", totalMoneyEarned);
+                    foundStatusList.Add(1);
                 }
             }
 
             if (!imageFoundInListB)
             {
                 Debug.Log("Image from listA not found in listB.");
-                matchFound = true;
                 emojiImage.sprite = emojiList[1];
+                foundStatusList.Add(0);
             }
         }
 
-        if (!matchFound)
+        if (foundStatusList.Count == listA.Count && foundStatusList.Contains(0) == false)
         {
-            Debug.Log("Comparison completed. Check the console for details.");
-
-            totalMoneyEarned += ((moneyReward * 2 * (listA.Count)) - (moneyReward * listA.Count));
-            PlayerPrefs.SetInt("TotalMoney", totalMoneyEarned);
+            Debug.Log("All items are common.");
+            totalMoneyEarned += (moneyReward * listA.Count);
             emojiImage.sprite = emojiList[0];
+            Debug.Log("Found/Not Found Status: " + string.Join(", ", foundStatusList));
         }
         else
         {
-            Debug.Log("No matches found between the image lists.");
+            Debug.Log("Comparison completed. Check the console for details.");
+            Debug.Log("Found/Not Found Status: " + string.Join(", ", foundStatusList));
         }
 
         UpdateMoneyText();

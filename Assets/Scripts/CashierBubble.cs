@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Cashier : MonoBehaviour
+public class CashierBubble : MonoBehaviour
 {
     public GameObject sourceUIObject;
     public Vector3 newPosition = new Vector3(1350, 700, 0); 
