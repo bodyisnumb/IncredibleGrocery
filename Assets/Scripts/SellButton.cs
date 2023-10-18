@@ -97,7 +97,7 @@ public class SellButton : MonoBehaviour
         return result;
     }
 
-    void UpdateMoneyText()
+   public void UpdateMoneyText()
     {
         moneyText.text = "$ " + totalMoneyEarned;
     }

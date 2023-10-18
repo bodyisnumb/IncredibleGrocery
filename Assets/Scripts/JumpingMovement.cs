@@ -14,6 +14,7 @@ public class JumpingMovement : MonoBehaviour
     private Vector3 initialScale;
     private bool isReturning = false;
     private bool hasCompletedRoundTrip = false;
+    private bool startReverseJump = false;
 
     void Start()
     {
@@ -62,7 +63,7 @@ public class JumpingMovement : MonoBehaviour
                                     currentJumpPoint++;
                                     StartCoroutine(NextJumpDelayed());
                                 }
-                                else
+                                else if (startReverseJump)
                                 {
                                     isReturning = true;
                                     currentJumpPoint--;
@@ -90,5 +91,10 @@ public class JumpingMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(jumpDelay);
         MoveToNextJumpPoint();
+    }
+
+    public void StartReverseJump()
+    {
+        startReverseJump = true;
     }
 }
